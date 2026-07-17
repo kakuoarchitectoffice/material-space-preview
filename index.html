@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="ja" class="is-locked">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="タイルから空間を構想する、限定公開の空間デザイン・コンセプトサイト。" />
+  <meta name="robots" content="noindex, nofollow, noarchive" />
+  <title>tiles SPACE — Private Preview</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Noto+Sans+JP:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="project.css" />
+  <script src="access.js" defer></script>
+</head>
+<body>
+  <section class="access-gate" id="access-gate" aria-labelledby="access-title">
+    <div class="access-gate__visual" aria-hidden="true"></div>
+    <div class="access-gate__panel">
+      <p class="access-gate__eyebrow">PRIVATE PREVIEW</p>
+      <h1 id="access-title">tiles <span>SPACE</span></h1>
+      <p class="access-gate__lead">このサイトは限定公開です。<br>閲覧用パスワードを入力してください。</p>
+      <form class="access-form" novalidate>
+        <label for="access-password">PASSWORD</label>
+        <div class="access-form__row">
+          <input id="access-password" name="password" type="password" autocomplete="current-password" required />
+          <button type="submit" aria-label="パスワードを確認する">ENTER <span>→</span></button>
+        </div>
+        <p class="access-error" role="alert" aria-live="polite"></p>
+      </form>
+      <p class="access-gate__note">CONCEPT DEMO / AUTHORIZED VIEWERS ONLY</p>
+    </div>
+  </section>
+
+  <header class="site-header" id="top">
+    <a class="brand" href="#top" aria-label="トップへ">
+      <span class="brand-primary">tiles</span>
+      <span class="brand-secondary">SPACE</span>
+      <small>PRIVATE CONCEPT</small>
+    </a>
+    <nav class="desktop-nav" aria-label="メインナビゲーション">
+      <a href="#spaces">SPACE</a><a href="#tiles">TILE</a><a href="#service">DESIGN SERVICE</a><a href="#journal">STORY</a>
+    </nav>
+    <div class="header-actions">
+      <button class="search-button" type="button" aria-label="検索を開く">SEARCH</button>
+      <a class="consult-button" href="#contact">CONSULTATION</a>
+      <button class="menu-button" type="button" aria-label="メニューを開く" aria-expanded="false"><span></span><span></span></button>
+    </div>
+  </header>
+
+  <aside class="mobile-menu" aria-hidden="true">
+    <nav><a href="#spaces">SPACE</a><a href="#tiles">TILE</a><a href="#service">DESIGN SERVICE</a><a href="#journal">STORY</a><a href="#contact">CONSULTATION</a></nav>
+  </aside>
+
+  <main>
+    <section class="hero">
+      <img class="hero-image" src="https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?auto=format&fit=crop&w=2200&q=90" alt="石と木の質感が調和した静かなリビング空間" />
+      <div class="hero-shade"></div>
+      <div class="hero-copy">
+        <p class="eyebrow">MATERIAL TO SPACE</p>
+        <h1>一枚のタイルから、<br>空間のすべてを。</h1>
+        <p class="hero-description">素材を選ぶ。その先の光、家具、時間まで。<br>タイルを起点に、心地よい空間をデザインします。</p>
+        <div class="hero-links"><a href="#spaces">空間から探す <span>↘</span></a><a href="#tiles">タイルから探す <span>↘</span></a></div>
+      </div>
+      <div class="hero-index"><span>01</span><span class="line"></span><span>05</span></div>
+      <button class="material-pin" type="button" data-product="travertine" aria-label="使用タイルを見る"><span>+</span><b>USED TILE</b></button>
+      <p class="scroll-label">SCROLL TO EXPLORE</p>
+    </section>
+
+    <section class="intro section-pad">
+      <div><p class="section-label">ABOUT tiles SPACE</p></div>
+      <div class="intro-copy"><h2>タイルは、仕上げではなく<br>空間の始まりです。</h2><p>色、かたち、手触り。その小さな選択が、空間全体の空気をつくります。tiles SPACEは、素材のコレクションと空間デザインをつなぐ、新しいインスピレーション・プラットフォームです。</p></div>
+    </section>
+
+    <section class="spaces section-pad" id="spaces">
+      <div class="section-heading"><div><p class="section-label">CURATED SPACES</p><h2>空間から、出会う。</h2></div><a href="#spaces-grid" class="text-link">VIEW ALL SPACES <span>→</span></a></div>
+      <div class="filters" role="group" aria-label="空間カテゴリ"><button class="active" data-filter="all">ALL</button><button data-filter="residence">RESIDENCE</button><button data-filter="hotel">HOTEL</button><button data-filter="retail">RETAIL</button><button data-filter="office">OFFICE</button></div>
+      <div class="space-grid" id="spaces-grid">
+        <article class="space-card large" data-category="residence"><button class="card-hit" data-project="quiet" aria-label="Quiet Residenceの詳細を見る"></button><div class="image-wrap"><img src="https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=1800&q=88" alt="自然光の入る住宅リビング"><span>01</span></div><div class="card-meta"><div><h3>Quiet Residence</h3><p>Residence / Kyoto</p></div><p>Natural stone texture<br>Warm grey collection</p></div></article>
+        <article class="space-card" data-category="hotel"><button class="card-hit" data-project="stillness" aria-label="Stillness Hotelの詳細を見る"></button><div class="image-wrap"><img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=1400&q=88" alt="ダークトーンのホテルラウンジ"><span>02</span></div><div class="card-meta"><div><h3>Stillness Hotel</h3><p>Hospitality / Hakone</p></div><p>Deep stone<br>Charcoal collection</p></div></article>
+        <article class="space-card" data-category="retail"><button class="card-hit" data-project="earthen" aria-label="Earthen Galleryの詳細を見る"></button><div class="image-wrap"><img src="https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea?auto=format&fit=crop&w=1400&q=88" alt="土色の素材を使ったギャラリー"><span>03</span></div><div class="card-meta"><div><h3>Earthen Gallery</h3><p>Retail / Tokyo</p></div><p>Handcrafted clay<br>Sand collection</p></div></article>
+        <article class="space-card wide" data-category="office"><button class="card-hit" data-project="focus" aria-label="Soft Focus Officeの詳細を見る"></button><div class="image-wrap"><img src="https://images.unsplash.com/photo-1497366811353-6870744d04b2?auto=format&fit=crop&w=1900&q=88" alt="素材感を生かしたオフィス"><span>04</span></div><div class="card-meta"><div><h3>Soft Focus Office</h3><p>Workspace / Osaka</p></div><p>Limestone expression<br>Greige collection</p></div></article>
+      </div>
+    </section>
+
+    <section class="tile-finder section-pad" id="tiles">
+      <div class="finder-copy"><p class="section-label light">FIND YOUR TILE</p><h2>触感から、色から、<br>理想の一枚へ。</h2><p>空間のイメージや用途に合わせて、コレクションを横断して探せます。</p><a href="#tile-list" class="outline-link">タイルを探す <span>→</span></a></div>
+      <div class="swatch-field" id="tile-list">
+        <button class="swatch swatch-1" data-product="travertine"><span>TRAVERTINE</span><small>Warm / Stone</small></button>
+        <button class="swatch swatch-2" data-product="deepstone"><span>DEEP STONE</span><small>Dark / Textured</small></button>
+        <button class="swatch swatch-3" data-product="clay"><span>CRAFT CLAY</span><small>Earth / Handmade</small></button>
+        <button class="swatch swatch-4" data-product="limestone"><span>LIMESTONE</span><small>Greige / Calm</small></button>
+      </div>
+    </section>
+
+    <section class="design-service section-pad" id="service">
+      <div class="service-visual"><img src="https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&w=1600&q=88" alt="タイルと家具を統合したインテリアデザイン"><span class="service-mark">SPACE<br>DESIGN</span></div>
+      <div class="service-copy"><p class="section-label">DESIGN SERVICE</p><h2>タイルの先まで、<br>デザインする。</h2><p>タイル選定だけでなく、素材の組み合わせ、家具、照明、空間構成まで。プロジェクトの初期構想から完成イメージの可視化まで、一貫してご提案します。</p><ol><li><span>01</span>ヒアリング・方向性整理</li><li><span>02</span>タイル・素材コーディネート</li><li><span>03</span>空間デザイン・ビジュアル提案</li></ol><a class="dark-link" href="#contact">空間デザインについて相談する <span>→</span></a></div>
+    </section>
+
+    <section class="journal section-pad" id="journal">
+      <div class="section-heading"><div><p class="section-label">STORIES &amp; MATERIALS</p><h2>素材を、深く知る。</h2></div><a href="#journal" class="text-link">VIEW ALL STORIES <span>→</span></a></div>
+      <div class="story-grid">
+        <article><img src="https://images.unsplash.com/photo-1615874694520-474822394e73?auto=format&fit=crop&w=1000&q=85" alt="タイルのサンプルと素材"><p>JOURNAL / MATERIAL</p><h3>光で変わる、タイルの表情。</h3></article>
+        <article><img src="https://images.unsplash.com/photo-1600566753051-f0b89df2dd90?auto=format&fit=crop&w=1000&q=85" alt="タイルのある洗面空間"><p>DESIGN NOTE / BATHROOM</p><h3>水まわりを、居場所に変える。</h3></article>
+        <article><img src="https://images.unsplash.com/photo-1600210491892-03d54c0aaf87?auto=format&fit=crop&w=1000&q=85" alt="落ち着いた素材のリビング"><p>INTERVIEW / DESIGNER</p><h3>素材から考える、静かな空間。</h3></article>
+      </div>
+    </section>
+
+    <section class="contact" id="contact">
+      <div><p class="section-label light">START A PROJECT</p><h2>空間のこと、タイルのこと。<br>まずはお聞かせください。</h2><p class="contact-note">デモサイトのため送信は行いません。入力内容の確認画面までお試しいただけます。</p></div>
+      <form class="consult-form" novalidate>
+        <fieldset><legend>ご相談内容</legend><label><input type="radio" name="consultation" value="空間デザイン" checked> 空間デザイン</label><label><input type="radio" name="consultation" value="タイル選定"> タイル選定</label><label><input type="radio" name="consultation" value="商品・サンプル"> 商品・サンプル</label></fieldset>
+        <label><span>お名前</span><input name="name" type="text" autocomplete="name" required></label>
+        <label><span>メールアドレス</span><input name="email" type="email" autocomplete="email" required></label>
+        <label><span>ご相談内容・用途</span><textarea name="message" rows="4" required></textarea></label>
+        <p class="form-error" role="alert" aria-live="polite"></p>
+        <button class="form-confirm" type="submit">入力内容を確認する <span>→</span></button>
+      </form>
+      <div class="form-review" hidden aria-live="polite"><p class="section-label light">CONFIRMATION</p><h3>入力内容をご確認ください。</h3><dl></dl><p>このデモでは送信されません。</p><button class="form-back" type="button">入力画面に戻る</button></div>
+    </section>
+  </main>
+
+  <footer><a class="brand footer-brand" href="#top"><span class="brand-primary">tiles</span><span class="brand-secondary">SPACE</span><small>PRIVATE CONCEPT</small></a><div><a href="#spaces">SPACE</a><a href="#tiles">TILE</a><a href="#service">DESIGN SERVICE</a><a href="#journal">STORY</a></div><p>CONCEPT PROTOTYPE<br>LIMITED PREVIEW</p></footer>
+
+  <section class="project-view" aria-hidden="true" aria-label="プロジェクト詳細">
+    <header class="project-head"><button class="project-back" type="button" aria-label="一覧に戻る">← <span>BACK</span></button><div><p class="project-type">RESIDENCE / KYOTO</p><h1 class="project-title">Quiet Residence</h1></div><nav class="project-tabs" aria-label="表示切替"><button class="active" data-tab="photos">事例写真</button><button data-tab="overview">プロジェクト概要</button><button data-tab="materials">使用タイル</button><button data-tab="proposal">デザイン提案</button></nav></header>
+    <div class="project-body">
+      <aside class="project-info"><div class="project-avatar"></div><h2>tiles SPACE Design Team</h2><p class="info-label">PROJECT MEMBER</p><p>MATERIAL TEAM<br>DESIGN PARTNER</p><dl><div><dt>用途</dt><dd class="info-use">住宅</dd></div><div><dt>所在地</dt><dd class="info-place">京都</dd></div><div><dt>床面積</dt><dd>142.80㎡</dd></div><div><dt>完成</dt><dd>2026-07</dd></div></dl><a href="#contact" class="project-consult">この空間を相談する <span>→</span></a></aside>
+      <div class="project-stage">
+        <section class="project-panel active" data-panel="photos"><div class="project-main-image"><img class="project-photo" src="https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=1900&q=90" alt="空間写真"><button class="photo-pin pin-a" type="button" aria-label="床タイルを見る"><span></span></button><button class="photo-pin pin-b" type="button" aria-label="壁タイルを見る"><span></span></button><div class="pin-card"><img src="https://images.unsplash.com/photo-1600607688969-a5bfcd646154?auto=format&fit=crop&w=500&q=85" alt="Warm Travertine"><div><p>Warm Travertine</p><small>600 × 1200 / Warm greige</small><button data-product="travertine">製品詳細を見る →</button></div></div><small class="photo-credit">Concept visual / tiles SPACE</small></div><aside class="thumbnail-rail"><button class="active" data-src="https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=1900&q=90"><img src="https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=300&q=75" alt="リビング"></button><button data-src="https://images.unsplash.com/photo-1600607688969-a5bfcd646154?auto=format&fit=crop&w=1900&q=90"><img src="https://images.unsplash.com/photo-1600607688969-a5bfcd646154?auto=format&fit=crop&w=300&q=75" alt="ダイニング"></button><button data-src="https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?auto=format&fit=crop&w=1900&q=90"><img src="https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?auto=format&fit=crop&w=300&q=75" alt="壁面"></button><button data-src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1900&q=90"><img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=300&q=75" alt="外観"></button></aside></section>
+        <section class="project-panel overview-panel" data-panel="overview"><p class="section-label">PROJECT CONCEPT</p><h2>素材の静けさを、<br>暮らしの背景に。</h2><div class="overview-grid"><p>タイルが主張するのではなく、光や家具、日々の営みを静かに引き立てる住空間。大判のグレージュタイルを床から壁へ連続させ、素材の境界を抑えています。</p><dl><div><dt>DESIGN</dt><dd>tiles SPACE Design Team</dd></div><div><dt>TILE COORDINATE</dt><dd>MATERIAL TEAM</dd></div><div><dt>VISUAL DIRECTION</dt><dd>DESIGN PARTNER</dd></div></dl></div></section>
+        <section class="project-panel materials-panel" data-panel="materials"><div class="material-card" data-product="travertine"><img src="https://images.unsplash.com/photo-1600607688969-a5bfcd646154?auto=format&fit=crop&w=800&q=85" alt="Warm Travertine"><p>STONE COLLECTION</p><h3>Warm Travertine</h3><small>600 × 1200 mm / Textured</small><button>サンプル・空間相談 →</button></div><div class="material-card" data-product="clay"><img src="https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?auto=format&fit=crop&w=800&q=85" alt="Craft Clay"><p>CRAFT COLLECTION</p><h3>Craft Clay</h3><small>75 × 300 mm / Glazed</small><button>サンプル・空間相談 →</button></div><div class="material-card" data-product="limestone"><img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=800&q=85" alt="Soft Limestone"><p>GREIGE COLLECTION</p><h3>Soft Limestone</h3><small>1200 × 1200 mm / Matt</small><button>サンプル・空間相談 →</button></div></section>
+        <section class="project-panel proposal-panel" data-panel="proposal"><p class="section-label">SPACE DESIGN PROPOSAL</p><h2>素材から、空間全体の<br>佇まいを設計する。</h2><div class="proposal-grid"><article><span>01</span><h3>MATERIAL PALETTE</h3><p>Warm Travertineを基準に、オークと左官を組み合わせた低彩度の素材構成。</p></article><article><span>02</span><h3>LIGHTING</h3><p>壁面の凹凸をやわらかく拾う間接光と、生活の中心をつくる低いペンダント。</p></article><article><span>03</span><h3>FURNITURE</h3><p>タイルの大判スケールと調和する、水平基調の家具と余白のあるレイアウト。</p></article></div></section>
+      </div>
+    </div>
+  </section>
+
+  <dialog class="product-dialog" aria-labelledby="dialog-title">
+    <button class="dialog-close" type="button" aria-label="閉じる">×</button>
+    <div class="dialog-image"><img src="" alt=""></div>
+    <div class="dialog-content"><p class="section-label">SELECTED MATERIAL</p><h2 id="dialog-title"></h2><p class="dialog-subtitle"></p><dl><div><dt>SIZE</dt><dd class="product-size"></dd></div><div><dt>FINISH</dt><dd class="product-finish"></dd></div><div><dt>COLOR</dt><dd class="product-color"></dd></div><div><dt>USE</dt><dd>Interior / Floor / Wall</dd></div></dl><p class="dialog-note">掲載商品および品番は、コンセプトサイト用の参考表示です。</p><div class="dialog-actions"><a href="#contact" class="dark-link dialog-consult">このタイルで空間を相談する <span>→</span></a><a href="#contact" class="text-link dialog-consult">製品情報を確認する <span>→</span></a></div></div>
+  </dialog>
+
+  <div class="search-panel" aria-hidden="true"><button class="search-close" type="button" aria-label="検索を閉じる">×</button><p>SEARCH tiles SPACE</p><label><span>空間・色・素材を検索</span><input type="search" placeholder="例：グレージュ、ホテル、石目" autocomplete="off"></label><div class="search-suggestions">POPULAR: <button>GREIGE</button><button>HOTEL</button><button>CRAFT</button><button>LARGE FORMAT</button></div></div>
+  <script src="script.js"></script>
+  <script src="project.js"></script>
+</body>
+</html>

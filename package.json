@@ -1,0 +1,7 @@
+{
+  "name": "material-space-private-preview",
+  "private": true,
+  "scripts": {
+    "test": "\"${SITE_NODE:-node}\" --check access.js && \"${SITE_NODE:-node}\" --check script.js && \"${SITE_NODE:-node}\" --check project.js && \"${SITE_NODE:-node}\" tests/site.test.js"
+  }
+}
