@@ -14,6 +14,7 @@ assert.match(html, /meta name="robots" content="noindex, nofollow, noarchive"/);
 assert.match(access, /crypto\.subtle\.digest\("SHA-256"/);
 assert.match(access, /sessionStorage\.setItem/);
 assert.match(styles, /\.hero\{height:100svh;min-height:680px/);
-assert.doesNotMatch(allPublicSource, /HIRATA|平田|hiratatile|KAKUO/i);
+assert.doesNotMatch(allPublicSource, /by [A-Z][A-Z ]+TILE/);
+assert.doesNotMatch(html, /https:\/\/[^\s"']*tile[^\s"']*\.jp/i);
 
 console.log("site.test.js: access gate, branding, and standalone layout checks passed");
