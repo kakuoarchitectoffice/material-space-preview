@@ -2,6 +2,6 @@
   "name": "material-space-private-preview",
   "private": true,
   "scripts": {
-    "test": "\"${SITE_NODE:-node}\" --check access.js && \"${SITE_NODE:-node}\" --check script.js && \"${SITE_NODE:-node}\" --check project.js && \"${SITE_NODE:-node}\" tests/site.test.js"
+    "test": "\"${SITE_NODE:-node}\" --check access.js && \"${SITE_NODE:-node}\" --check demo-data.js && \"${SITE_NODE:-node}\" --check script.js && \"${SITE_NODE:-node}\" --check project.js && \"${SITE_NODE:-node}\" --check admin.js && \"${SITE_NODE:-node}\" tests/site.test.js"
   }
 }
