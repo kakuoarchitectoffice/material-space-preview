@@ -1,4 +1,41 @@
 body.project-open{overflow:hidden}
+body.favorites-open{overflow:hidden}
+.favorites-view{position:fixed;z-index:75;inset:0;background:#f4f3ef;color:#171714;transform:translateY(100%);transition:transform .55s cubic-bezier(.77,0,.18,1);overflow:auto}
+.favorites-view.open{transform:none}
+.favorites-head{position:sticky;z-index:2;top:0;height:112px;padding:0 28px;display:grid;grid-template-columns:140px 1fr auto;align-items:center;gap:20px;background:#fff;border-bottom:1px solid #d8d6d0}
+.favorites-back{border:0;background:none;text-align:left;cursor:pointer;font:500 10px "DM Sans";letter-spacing:.14em}
+.favorites-back span{margin-left:9px}
+.favorites-head p{margin:0 0 5px;color:#8a877f;font:500 8px "DM Sans";letter-spacing:.16em}
+.favorites-head h1{margin:0;font:500 25px "DM Sans"}
+.favorites-head h1 span{display:inline-grid;place-items:center;min-width:24px;height:24px;margin-left:9px;border-radius:50%;background:#171714;color:#fff;font-size:10px;vertical-align:3px}
+.favorites-consult{border:1px solid #171714;padding:13px 17px;font:500 9px "DM Sans";letter-spacing:.13em}
+.favorites-body{padding:70px var(--pad) 100px}
+.favorites-intro{display:flex;align-items:end;justify-content:space-between;gap:40px;margin-bottom:50px;padding-bottom:32px;border-bottom:1px solid #c9c6be}
+.favorites-intro h2{margin:0;font-size:clamp(34px,4vw,54px);font-weight:300}
+.favorites-intro>p{margin:0;color:#77736c;font-size:11px;line-height:1.9;text-align:right}
+.favorites-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px}
+.favorites-grid[hidden]{display:none}
+.favorite-card{background:#fff;border:1px solid #dedcd7}
+.favorite-card-image{display:grid;place-items:center;aspect-ratio:4/3;background:#e7e3db;overflow:hidden}
+.favorite-card-image img{height:100%;object-fit:contain;padding:18px}
+.favorite-card-content{padding:22px}
+.favorite-card-label,.favorite-card-code{font:500 8px "DM Sans";letter-spacing:.13em;color:#88847c}
+.favorite-card-label{margin:0 0 8px}
+.favorite-card h2{margin:0 0 7px;font:500 21px "DM Sans"}
+.favorite-card-code{margin:0 0 20px}
+.favorite-card dl{margin:0;border-top:1px solid #dedcd7}
+.favorite-card dl>div{display:grid;grid-template-columns:64px 1fr;gap:12px;padding:9px 0;border-bottom:1px solid #dedcd7;font-size:10px}
+.favorite-card dt{font:500 8px "DM Sans";letter-spacing:.1em;color:#77736c}
+.favorite-card dd{margin:0}
+.favorite-card-actions{display:grid;gap:8px;margin-top:20px}
+.favorite-card-actions button{display:flex;justify-content:space-between;width:100%;border:1px solid #171714;background:#171714;color:#fff;padding:12px 13px;cursor:pointer;text-align:left;font-size:10px}
+.favorite-card-actions button:nth-child(2){background:transparent;color:#171714}
+.favorite-card-actions button:last-child{border:0;border-bottom:1px solid #aaa69e;background:transparent;color:#77736c;padding-left:0;padding-right:0}
+.favorites-empty{max-width:660px;margin:9vh auto;text-align:center}
+.favorites-empty[hidden]{display:none}
+.favorites-empty h2{margin:0;font-size:clamp(34px,5vw,58px);font-weight:300;line-height:1.45}
+.favorites-empty>p:not(.section-label){margin:28px auto 35px;max-width:500px;color:#77736c;font-size:13px;line-height:2}
+.favorites-empty .outline-link{background:transparent;margin:auto}
 .project-view{position:fixed;z-index:80;inset:0;background:#f4f3ef;color:#171714;transform:translateY(100%);transition:transform .55s cubic-bezier(.77,0,.18,1);overflow:hidden}
 .project-view.open{transform:none}
 .project-head{height:112px;padding:0 28px;display:grid;grid-template-columns:140px 1fr auto;align-items:center;gap:20px;background:#fff;border-bottom:1px solid #d8d6d0}
@@ -59,6 +96,7 @@ body.project-open{overflow:hidden}
 .material-card small{font-size:9px;color:#77736c}
 .material-card button{display:block;width:calc(100% - 32px);margin-top:18px;border:0;background:#171714;color:#fff;padding:12px;text-align:left;font-size:9px;cursor:pointer}
 @media(max-width:900px){.project-head{height:130px;grid-template-columns:60px 1fr}
+.favorites-grid{grid-template-columns:1fr 1fr}
 .project-tabs{grid-column:1/-1;height:48px}
 .project-tabs button{flex:1;padding:0 8px}
 .project-body{height:calc(100vh - 130px);grid-template-columns:1fr}
@@ -68,6 +106,15 @@ body.project-open{overflow:hidden}
 .overview-panel{padding:60px 35px}
 }
 @media(max-width:600px){.project-head{padding:0 14px}
+.favorites-head{height:86px;padding:0 14px;grid-template-columns:45px 1fr}
+.favorites-head h1{font-size:19px}
+.favorites-head p,.favorites-back span,.favorites-consult{display:none}
+.favorites-body{padding:42px 20px 70px}
+.favorites-intro{display:block;margin-bottom:30px;padding-bottom:24px}
+.favorites-intro>p{margin-top:18px;text-align:left}
+.favorites-grid{grid-template-columns:1fr}
+.favorite-card-content{padding:20px}
+.favorites-empty{margin:7vh auto}
 .project-title{font-size:19px}
 .project-type{display:none}
 .project-back span{display:none}

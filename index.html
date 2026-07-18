@@ -39,7 +39,7 @@
       <small>PRIVATE CONCEPT</small>
     </a>
     <nav class="desktop-nav" aria-label="メインナビゲーション">
-      <a href="#spaces">SPACE</a><a href="#tiles">TILE</a><a href="#service">DESIGN SERVICE</a><a href="#journal">STORY</a>
+      <a href="#spaces">SPACE</a><a href="#tiles">TILE</a><a href="#service">DESIGN SERVICE</a><a href="#journal">STORY</a><a href="#favorites" data-open-favorites>FAVORITES <span class="favorite-nav-count" aria-label="お気に入り0件">0</span></a>
     </nav>
     <div class="header-actions">
       <button class="search-button" type="button" aria-label="検索を開く">SEARCH</button>
@@ -49,7 +49,7 @@
   </header>
 
   <aside class="mobile-menu" aria-hidden="true">
-    <nav><a href="#spaces">SPACE</a><a href="#tiles">TILE</a><a href="#service">DESIGN SERVICE</a><a href="#journal">STORY</a><a href="#contact">CONSULTATION</a></nav>
+    <nav><a href="#spaces">SPACE</a><a href="#tiles">TILE</a><a href="#service">DESIGN SERVICE</a><a href="#journal">STORY</a><a href="#favorites" data-open-favorites>FAVORITES / お気に入り <span class="favorite-nav-count" aria-label="お気に入り0件">0</span></a><a href="#contact">CONSULTATION</a></nav>
   </aside>
 
   <main>
@@ -122,6 +122,24 @@
   </main>
 
   <footer><a class="brand footer-brand" href="#top"><span class="brand-primary">tiles</span><span class="brand-secondary">SPACE</span><small>PRIVATE CONCEPT</small></a><div><a href="#spaces">SPACE</a><a href="#tiles">TILE</a><a href="#service">DESIGN SERVICE</a><a href="#journal">STORY</a></div><p>CONCEPT PROTOTYPE<br>LIMITED PREVIEW</p></footer>
+
+  <section class="favorites-view" id="favorites" aria-hidden="true" aria-labelledby="favorites-title">
+    <header class="favorites-head">
+      <button class="favorites-back" type="button" aria-label="お気に入りを閉じる">← <span>BACK</span></button>
+      <div><p>MY TILE SELECTION</p><h1 id="favorites-title">FAVORITES <span class="favorites-count">0</span></h1></div>
+      <a href="#contact" class="favorites-consult">SAMPLE / CONSULTATION</a>
+    </header>
+    <div class="favorites-body">
+      <div class="favorites-intro"><div><p class="section-label">SAVED MATERIALS</p><h2>お気に入りタイル</h2></div><p>比較したいタイルをまとめて確認できます。<br><span class="favorites-count-copy">0件のお気に入り</span></p></div>
+      <div class="favorites-grid" aria-live="polite"></div>
+      <div class="favorites-empty" hidden>
+        <p class="section-label">NO SAVED MATERIALS</p>
+        <h2>お気に入りのタイルは<br>まだありません。</h2>
+        <p>気になるタイルの製品詳細から「お気に入りに追加」を選択すると、ここで比較できます。</p>
+        <button class="favorites-browse outline-link" type="button">タイルを探す <span>→</span></button>
+      </div>
+    </div>
+  </section>
 
   <section class="project-view" aria-hidden="true" aria-label="プロジェクト詳細">
     <header class="project-head"><button class="project-back" type="button" aria-label="一覧に戻る">← <span>BACK</span></button><div><p class="project-type">RESIDENCE / KYOTO</p><h1 class="project-title">Quiet Residence</h1></div><nav class="project-tabs" aria-label="表示切替"><button class="active" data-tab="photos">事例写真</button><button data-tab="overview">プロジェクト概要</button><button data-tab="materials">使用タイル</button><button data-tab="proposal">デザイン提案</button></nav></header>

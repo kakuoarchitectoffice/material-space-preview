@@ -50,11 +50,11 @@ dialog.querySelector('.dialog-space-link').addEventListener('click',()=>{
 });
 dialog.addEventListener('click',e=>{if(e.target===dialog)dialog.close()});
 
-const favoriteKey='tiles-space-favorites';
+const FAVORITES_STORAGE_KEY="tiles-space-favorites";
 function readFavorites(){
   try{
-    const stored=JSON.parse(localStorage.getItem(favoriteKey)||'[]');
-    return new Set(Array.isArray(stored)?stored:[]);
+    const stored=JSON.parse(localStorage.getItem(FAVORITES_STORAGE_KEY)||'[]');
+    return new Set(Array.isArray(stored)?stored.filter(productId=>products[productId]):[]);
   }catch(error){
     console.warn('お気に入りデータを初期化しました。',error);
     return new Set();
@@ -66,9 +66,20 @@ function updateFavoriteButton(productId){
   favoriteButton.setAttribute('aria-pressed',String(isFavorite));
   favoriteButton.innerHTML=isFavorite?'お気に入り済み <span>★</span>':'お気に入りに追加 <span>☆</span>';
 }
+function updateFavoriteCounts(favorites=readFavorites()){
+  const count=favorites.size;
+  document.querySelectorAll('.favorite-nav-count').forEach(element=>{
+    element.textContent=String(count);
+    element.setAttribute('aria-label',`お気に入り${count}件`);
+  });
+  document.querySelector('.favorites-count').textContent=String(count);
+  document.querySelector('.favorites-count-copy').textContent=`${count}件のお気に入り`;
+}
 function writeFavorites(favorites){
   try{
-    localStorage.setItem(favoriteKey,JSON.stringify([...favorites]));
+    localStorage.setItem(FAVORITES_STORAGE_KEY,JSON.stringify([...favorites]));
+    updateFavoriteCounts(favorites);
+    renderFavorites(favorites);
   }catch(error){
     console.warn('お気に入りを保存できませんでした。',error);
   }
@@ -80,6 +91,88 @@ dialog.querySelector('.product-favorite').addEventListener('click',()=>{
   writeFavorites(favorites);
   updateFavoriteButton(productId);
 });
+
+const favoritesView=document.querySelector('.favorites-view');
+const favoritesGrid=favoritesView.querySelector('.favorites-grid');
+const favoritesEmpty=favoritesView.querySelector('.favorites-empty');
+
+function createFavoriteCard(product){
+  const card=document.createElement('article');
+  card.className='favorite-card';
+  card.dataset.favoriteProduct=product.id;
+  card.innerHTML=`<div class="favorite-card-image"><img src="${product.image}" alt="${product.title}の表面"></div><div class="favorite-card-content"><p class="favorite-card-label">SAVED MATERIAL</p><h2>${product.title}</h2><p class="favorite-card-code">${product.code}</p><dl><div><dt>COLOR</dt><dd>${product.color}</dd></div><div><dt>SIZE</dt><dd>${product.size}</dd></div><div><dt>FINISH</dt><dd>${product.finish}</dd></div><div><dt>USE</dt><dd>${product.use.join(' / ')}</dd></div></dl><div class="favorite-card-actions"><button type="button" data-favorite-action="detail">製品詳細を見る <span>→</span></button><button type="button" data-favorite-action="sample">サンプルを請求する <span>→</span></button><button type="button" data-favorite-action="remove">お気に入りを解除 <span>×</span></button></div></div>`;
+  return card;
+}
+
+function renderFavorites(favorites=readFavorites()){
+  const favoriteProducts=[...favorites].map(productId=>products[productId]).filter(Boolean);
+  favoritesGrid.replaceChildren(...favoriteProducts.map(createFavoriteCard));
+  favoritesGrid.hidden=favoriteProducts.length===0;
+  favoritesEmpty.hidden=favoriteProducts.length!==0;
+  updateFavoriteCounts(new Set(favoriteProducts.map(product=>product.id)));
+}
+
+function openFavorites(){
+  document.dispatchEvent(new CustomEvent('close-project'));
+  mobileMenu.classList.remove('open');
+  menuBtn.setAttribute('aria-expanded','false');
+  mobileMenu.setAttribute('aria-hidden','true');
+  renderFavorites();
+  favoritesView.classList.add('open');
+  favoritesView.setAttribute('aria-hidden','false');
+  document.body.classList.add('favorites-open');
+  favoritesView.querySelector('.favorites-back').focus();
+}
+
+function closeFavorites({restoreUrl=true}={}){
+  favoritesView.classList.remove('open');
+  favoritesView.setAttribute('aria-hidden','true');
+  document.body.classList.remove('favorites-open');
+  if(restoreUrl&&location.hash==='#favorites')history.pushState(null,'',location.pathname+location.search);
+}
+
+function openSampleRequest(product){
+  document.querySelector('input[name="consultation"][value="商品・サンプル"]').checked=true;
+  const messageField=consultForm.elements.message;
+  if(!messageField.value.trim())messageField.value=`${product.title}（${product.code}）のサンプルを希望します。`;
+  closeFavorites({restoreUrl:false});
+  history.pushState(null,'','#contact');
+  document.querySelector('#contact').scrollIntoView({behavior:'smooth'});
+}
+
+document.querySelectorAll('[data-open-favorites]').forEach(link=>link.addEventListener('click',event=>{
+  event.preventDefault();
+  if(location.hash!=='#favorites')history.pushState(null,'','#favorites');
+  openFavorites();
+}));
+favoritesView.querySelector('.favorites-back').addEventListener('click',()=>closeFavorites());
+favoritesView.querySelector('.favorites-browse').addEventListener('click',()=>{
+  closeFavorites({restoreUrl:false});
+  history.pushState(null,'','#tiles');
+  document.querySelector('#tiles').scrollIntoView({behavior:'smooth'});
+});
+favoritesView.querySelector('.favorites-consult').addEventListener('click',()=>closeFavorites({restoreUrl:false}));
+favoritesGrid.addEventListener('click',event=>{
+  const actionButton=event.target.closest('[data-favorite-action]');
+  const card=event.target.closest('[data-favorite-product]');
+  if(!actionButton||!card)return;
+  const product=products[card.dataset.favoriteProduct];
+  if(!product)return;
+  if(actionButton.dataset.favoriteAction==='detail')openProduct(product.id);
+  if(actionButton.dataset.favoriteAction==='sample')openSampleRequest(product);
+  if(actionButton.dataset.favoriteAction==='remove'){
+    const favorites=readFavorites();
+    favorites.delete(product.id);
+    writeFavorites(favorites);
+    if(dialog.dataset.productId===product.id)updateFavoriteButton(product.id);
+  }
+});
+addEventListener('popstate',()=>location.hash==='#favorites'?openFavorites():closeFavorites({restoreUrl:false}));
+document.addEventListener('keydown',event=>{
+  if(event.key==='Escape'&&favoritesView.classList.contains('open')&&!dialog.open)closeFavorites();
+});
+renderFavorites();
+if(location.hash==='#favorites')openFavorites();
 
 const searchPanel=document.querySelector('.search-panel'),searchInput=searchPanel.querySelector('input');
 document.querySelector('.search-button').addEventListener('click',()=>{searchPanel.classList.add('open');
