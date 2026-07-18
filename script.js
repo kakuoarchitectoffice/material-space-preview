@@ -1,4 +1,9 @@
-const products={travertine:{title:"Warm Travertine",subtitle:"自然の層を感じる、穏やかな石目。",size:"600 × 1200 mm",finish:"Textured / Low sheen",color:"Warm greige",image:"https://images.unsplash.com/photo-1600607688969-a5bfcd646154?auto=format&fit=crop&w=1200&q=90"},deepstone:{title:"Deep Stone",subtitle:"光を静かに受け止める、深い陰影。",size:"600 × 600 mm",finish:"Rough / Matt",color:"Charcoal",image:"https://images.unsplash.com/photo-1595514535116-de546c6f2f7f?auto=format&fit=crop&w=1200&q=90"},clay:{title:"Craft Clay",subtitle:"手仕事の揺らぎを残した土の表情。",size:"75 × 300 mm",finish:"Handcrafted / Glazed",color:"Sand beige",image:"https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?auto=format&fit=crop&w=1200&q=90"},limestone:{title:"Soft Limestone",subtitle:"空間に溶け込む、静かなグレージュ。",size:"1200 × 1200 mm",finish:"Fine textured / Matt",color:"Pale greige",image:"https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&q=90"}};
+const products={
+travertine:{id:"travertine",code:"HT-TRV-6012-WG",title:"Warm Travertine",image:"assets/tile-travertine.jpg",color:"Warm Greige",size:"600 × 1200 mm",thickness:"9 mm",finish:"Textured / Low Sheen",use:["Floor","Wall","Interior"],description:"自然な層と穏やかな石目を表現した、大判のトラバーチン調タイル。光をやわらかく受け止め、空間に静かな奥行きをつくります。",spaceId:"quiet"},
+deepstone:{id:"deepstone",code:"HT-DST-6060-CH",title:"Deep Stone",image:"assets/tile-deep-stone.jpg",color:"Charcoal",size:"600 × 600 mm",thickness:"10 mm",finish:"Rough / Matt",use:["Floor","Wall","Interior"],description:"細かな粒子と低彩度の濃淡を重ねた、チャコールの石目調タイル。落ち着いた陰影でラウンジやホテル空間を引き締めます。",spaceId:"stillness"},
+clay:{id:"clay",code:"HT-CCL-0730-SB",title:"Craft Clay",image:"assets/tile-craft-clay.jpg",color:"Sand Beige",size:"75 × 300 mm",thickness:"8.5 mm",finish:"Handcrafted / Soft Glaze",use:["Wall","Interior"],description:"手仕事の揺らぎと土の粒子感を残した、サンドベージュのクラフトタイル。穏やかな艶が壁面に繊細な表情を与えます。",spaceId:"earthen"},
+limestone:{id:"limestone",code:"HT-LST-1212-PG",title:"Soft Limestone",image:"assets/tile-soft-limestone.jpg",color:"Pale Greige",size:"1200 × 1200 mm",thickness:"9 mm",finish:"Fine Textured / Matt",use:["Floor","Wall","Interior"],description:"微細な化石の気配と石灰岩の粒子を静かに再現した、淡いグレージュの大判タイル。素材同士を自然につなぎます。",spaceId:"focus"}
+};
 
 const header=document.querySelector('.site-header');
 addEventListener('scroll',()=>header.classList.toggle('scrolled',scrollY>30),{passive:true});
@@ -18,18 +23,63 @@ document.querySelectorAll('.space-card').forEach(card=>card.classList.toggle('hi
 
 const dialog=document.querySelector('.product-dialog');
 function openProduct(id){const p=products[id]||products.travertine;
+dialog.dataset.productId=p.id;
 dialog.querySelector('img').src=p.image;
 dialog.querySelector('img').alt=p.title;
 dialog.querySelector('#dialog-title').textContent=p.title;
-dialog.querySelector('.dialog-subtitle').textContent=p.subtitle;
+dialog.querySelector('.product-code').textContent=p.code;
+dialog.querySelector('.dialog-subtitle').textContent=p.description;
 dialog.querySelector('.product-size').textContent=p.size;
+dialog.querySelector('.product-thickness').textContent=p.thickness;
 dialog.querySelector('.product-finish').textContent=p.finish;
 dialog.querySelector('.product-color').textContent=p.color;
+dialog.querySelector('.product-use').textContent=p.use.join(' / ');
+updateFavoriteButton(p.id);
 dialog.showModal()}document.querySelectorAll('[data-product]').forEach(el=>el.addEventListener('click',e=>{e.preventDefault();
 openProduct(el.dataset.product)}));
 dialog.querySelector('.dialog-close').addEventListener('click',()=>dialog.close());
-dialog.querySelector('.dialog-consult').addEventListener('click',()=>dialog.close());
+dialog.querySelector('.dialog-sample').addEventListener('click',()=>{
+  document.querySelector('input[name="consultation"][value="商品・サンプル"]').checked=true;
+  dialog.close();
+  document.dispatchEvent(new CustomEvent('close-project'));
+});
+dialog.querySelector('.dialog-space-link').addEventListener('click',()=>{
+  const product=products[dialog.dataset.productId]||products.travertine;
+  dialog.close();
+  document.dispatchEvent(new CustomEvent('open-project',{detail:{projectId:product.spaceId}}));
+});
 dialog.addEventListener('click',e=>{if(e.target===dialog)dialog.close()});
+
+const favoriteKey='tiles-space-favorites';
+function readFavorites(){
+  try{
+    const stored=JSON.parse(localStorage.getItem(favoriteKey)||'[]');
+    return new Set(Array.isArray(stored)?stored:[]);
+  }catch(error){
+    console.warn('お気に入りデータを初期化しました。',error);
+    return new Set();
+  }
+}
+function updateFavoriteButton(productId){
+  const favoriteButton=dialog.querySelector('.product-favorite');
+  const isFavorite=readFavorites().has(productId);
+  favoriteButton.setAttribute('aria-pressed',String(isFavorite));
+  favoriteButton.innerHTML=isFavorite?'お気に入り済み <span>★</span>':'お気に入りに追加 <span>☆</span>';
+}
+function writeFavorites(favorites){
+  try{
+    localStorage.setItem(favoriteKey,JSON.stringify([...favorites]));
+  }catch(error){
+    console.warn('お気に入りを保存できませんでした。',error);
+  }
+}
+dialog.querySelector('.product-favorite').addEventListener('click',()=>{
+  const productId=dialog.dataset.productId;
+  const favorites=readFavorites();
+  if(favorites.has(productId))favorites.delete(productId);else favorites.add(productId);
+  writeFavorites(favorites);
+  updateFavoriteButton(productId);
+});
 
 const searchPanel=document.querySelector('.search-panel'),searchInput=searchPanel.querySelector('input');
 document.querySelector('.search-button').addEventListener('click',()=>{searchPanel.classList.add('open');

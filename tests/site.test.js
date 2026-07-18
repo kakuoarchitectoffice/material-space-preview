@@ -7,7 +7,9 @@ const read = (file) => fs.readFileSync(path.join(projectRoot, file), "utf8");
 const html = read("index.html");
 const styles = read("styles.css");
 const access = read("access.js");
-const allPublicSource = [html, styles, access, read("script.js"), read("project.js")].join("\n");
+const productScript = read("script.js");
+const projectScript = read("project.js");
+const allPublicSource = [html, styles, access, productScript, projectScript].join("\n");
 
 assert.match(html, /id="access-gate"/);
 assert.match(html, /meta name="robots" content="noindex, nofollow, noarchive"/);
@@ -16,5 +18,20 @@ assert.match(access, /sessionStorage\.setItem/);
 assert.match(styles, /\.hero\{height:100svh;min-height:680px/);
 assert.doesNotMatch(allPublicSource, /by [A-Z][A-Z ]+TILE/);
 assert.doesNotMatch(html, /https:\/\/[^\s"']*tile[^\s"']*\.jp/i);
+assert.match(html, /class="product-code"/);
+assert.match(html, /class="product-thickness"/);
+assert.match(html, /class="product-favorite"/);
+assert.match(html, /class="dark-link dialog-sample"/);
+assert.match(html, /class="text-link dialog-space-link"/);
+assert.match(productScript, /code:"HT-TRV-6012-WG"/);
+assert.match(productScript, /image:"assets\/tile-travertine\.jpg"/);
+assert.match(productScript, /thickness:"9 mm"/);
+assert.match(productScript, /use:\["Floor","Wall","Interior"\]/);
+assert.match(productScript, /description:"自然な層/);
+assert.match(projectScript, /addEventListener\('open-project'/);
+assert.match(projectScript, /addEventListener\('close-project'/);
+["tile-travertine.jpg","tile-deep-stone.jpg","tile-craft-clay.jpg","tile-soft-limestone.jpg"].forEach((file)=>{
+  assert.ok(fs.statSync(path.join(projectRoot,"assets",file)).size>100000,`${file} should be a real product image`);
+});
 
 console.log("site.test.js: access gate, branding, and standalone layout checks passed");

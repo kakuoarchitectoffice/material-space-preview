@@ -2,12 +2,7 @@ const projectData={quiet:{title:'Quiet Residence',type:'RESIDENCE / KYOTO',use:'
 
 const projectView=document.querySelector('.project-view');
 
-function setProjectTab(name){document.querySelectorAll('.project-tabs button').forEach(b=>{
-const isActive=b.dataset.tab===name;
-b.classList.toggle('active',isActive);
-b.setAttribute('aria-selected',String(isActive))});
-document.querySelectorAll('.project-panel').forEach(p=>p.classList.toggle('active',p.dataset.panel===name))}
-document.querySelectorAll('[data-project]').forEach(button=>button.addEventListener('click',()=>{const p=projectData[button.dataset.project];
+function openProject(projectId){const p=projectData[projectId]||projectData.quiet;
 projectView.querySelector('.project-title').textContent=p.title;
 projectView.querySelector('.project-type').textContent=p.type;
 projectView.querySelector('.info-use').textContent=p.use;
@@ -16,7 +11,15 @@ projectView.querySelector('.project-photo').src=p.image;
 setProjectTab('photos');
 projectView.classList.add('open');
 projectView.setAttribute('aria-hidden','false');
-document.body.classList.add('project-open')}));
+document.body.classList.add('project-open')}
+
+function setProjectTab(name){document.querySelectorAll('.project-tabs button').forEach(b=>{
+const isActive=b.dataset.tab===name;
+b.classList.toggle('active',isActive);
+b.setAttribute('aria-selected',String(isActive))});
+document.querySelectorAll('.project-panel').forEach(p=>p.classList.toggle('active',p.dataset.panel===name))}
+document.querySelectorAll('[data-project]').forEach(button=>button.addEventListener('click',()=>openProject(button.dataset.project)));
+document.addEventListener('open-project',event=>openProject(event.detail?.projectId));
 
 projectView.querySelector('.project-back').addEventListener('click',()=>{projectView.classList.remove('open');
 projectView.setAttribute('aria-hidden','true');
@@ -40,6 +43,7 @@ function closeProject(){
   pinCard.classList.remove('show');
 }
 
+document.addEventListener('close-project',closeProject);
 projectView.querySelector('.project-consult').addEventListener('click',closeProject);
 document.addEventListener('keydown',event=>{
   if(event.key==='Escape'&&projectView.classList.contains('open'))closeProject();
