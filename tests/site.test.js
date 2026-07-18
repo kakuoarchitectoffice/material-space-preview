@@ -14,6 +14,8 @@ const allPublicSource = [html, styles, projectStyles, access, productScript, pro
 
 assert.match(html, /id="access-gate"/);
 assert.match(html, /meta name="robots" content="noindex, nofollow, noarchive"/);
+assert.match(html, /rel="icon" href="assets\/favicon\.svg"/);
+assert.ok(fs.statSync(path.join(projectRoot,"assets","favicon.svg")).size>100,"favicon.svg should be present");
 assert.match(access, /crypto\.subtle\.digest\("SHA-256"/);
 assert.match(access, /sessionStorage\.setItem/);
 assert.match(styles, /\.hero\{height:100svh;min-height:680px/);
